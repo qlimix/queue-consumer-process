@@ -8,7 +8,7 @@ use Qlimix\Process\ProcessInterface;
 use Qlimix\Queue\Consumer\Runtime\ControlInterface;
 use Qlimix\Queue\Processor\ProcessorInterface;
 
-final class QueueConsumer implements ProcessInterface
+final class QueueConsumerProcess implements ProcessInterface
 {
     /** @var QueueConsumerInterface */
     private $queueConsumer;
