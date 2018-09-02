@@ -46,7 +46,7 @@ final class QueueConsumerProcess implements ProcessInterface
                     }
                 }
             } catch (\Throwable $exception) {
-                if ($control->abort()) {
+                 if ($control->abort()) {
                     break;
                 }
 
