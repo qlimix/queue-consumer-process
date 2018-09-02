@@ -35,7 +35,7 @@ final class QueueConsumer implements ProcessInterface
 
         while (true) {
             try {
-                $messages = $this->queueConsumer->consume(1);
+                $messages = $this->queueConsumer->consume();
                 foreach ($messages as $message) {
                     $this->processor->process($message);
 
