@@ -5,7 +5,7 @@ namespace Qlimix\Queue\Consumer;
 use Qlimix\Process\Exception\ProcessException;
 use Qlimix\Process\Output\OutputInterface;
 use Qlimix\Process\ProcessInterface;
-use Qlimix\Queue\Consumer\Runtime\ControlInterface;
+use Qlimix\Process\Runtime\ControlInterface;
 use Qlimix\Queue\Processor\ProcessorInterface;
 
 final class QueueConsumerProcess implements ProcessInterface
