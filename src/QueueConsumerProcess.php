@@ -31,8 +31,6 @@ final class QueueConsumerProcess implements ProcessInterface
      */
     public function run(ControlInterface $control, OutputInterface $output): void
     {
-        $control->init();
-
         while (true) {
             try {
                 $messages = $this->queueConsumer->consume();
