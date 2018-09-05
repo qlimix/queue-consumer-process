@@ -34,9 +34,18 @@ final class QueueConsumerProcess implements ProcessInterface
         while (true) {
             try {
                 $messages = $this->queueConsumer->consume();
+            } catch (\Throwable $exception) {
+                if ($control->abort()) {
+                    break;
+                }
+
+                throw new ProcessException('Failing consuming', 0, $exception);
+            }
+
+            try {
                 foreach ($messages as $message) {
-                    $this->processor->process($message);
-                    $this->queueConsumer->acknowledge($message);
+                        $this->processor->process($message);
+                        $this->queueConsumer->acknowledge($message);
 
                     $control->tick();
 
@@ -45,11 +54,11 @@ final class QueueConsumerProcess implements ProcessInterface
                     }
                 }
             } catch (\Throwable $exception) {
-                 if ($control->abort()) {
+                if ($control->abort()) {
                     break;
                 }
 
-                throw new ProcessException('Failing consuming', 0, $exception);
+                throw new ProcessException('Failing processing', 0, $exception);
             }
 
             $control->tick();
