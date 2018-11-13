@@ -44,8 +44,8 @@ final class QueueConsumerProcess implements ProcessInterface
 
             try {
                 foreach ($messages as $message) {
-                        $this->processor->process($message);
-                        $this->queueConsumer->acknowledge($message);
+                    $this->processor->process($message);
+                    $this->queueConsumer->acknowledge($message);
 
                     $control->tick();
 
