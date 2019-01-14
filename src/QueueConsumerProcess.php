@@ -5,60 +5,33 @@ namespace Qlimix\Queue\Consumer;
 use Qlimix\Process\Exception\ProcessException;
 use Qlimix\Process\Output\OutputInterface;
 use Qlimix\Process\ProcessInterface;
-use Qlimix\Process\Runtime\ControlInterface;
+use Qlimix\Process\Runtime\RuntimeControlInterface;
 use Qlimix\Queue\Processor\ProcessorInterface;
 
 final class QueueConsumerProcess implements ProcessInterface
 {
-    /** @var QueueConsumerInterface */
-    private $queueConsumer;
-
     /** @var ProcessorInterface */
     private $processor;
 
-    /**
-     * @param QueueConsumerInterface $queueConsumer
-     * @param ProcessorInterface $processor
-     */
-    public function __construct(QueueConsumerInterface $queueConsumer, ProcessorInterface $processor)
+    public function __construct(ProcessorInterface $processor)
     {
-        $this->queueConsumer = $queueConsumer;
         $this->processor = $processor;
     }
 
     /**
      * @inheritDoc
      */
-    public function run(ControlInterface $control, OutputInterface $output): void
+    public function run(RuntimeControlInterface $control, OutputInterface $output): void
     {
         while (true) {
             try {
-                $messages = $this->queueConsumer->consume();
+                $this->processor->process();
             } catch (\Throwable $exception) {
                 if ($control->abort()) {
                     break;
                 }
 
-                throw new ProcessException('Failing consuming', 0, $exception);
-            }
-
-            try {
-                foreach ($messages as $message) {
-                    $this->processor->process($message);
-                    $this->queueConsumer->acknowledge($message);
-
-                    $control->tick();
-
-                    if ($control->abort()) {
-                        break 2;
-                    }
-                }
-            } catch (\Throwable $exception) {
-                if ($control->abort()) {
-                    break;
-                }
-
-                throw new ProcessException('Failing processing', 0, $exception);
+                throw new ProcessException('Failed processing', 0, $exception);
             }
 
             $control->tick();
