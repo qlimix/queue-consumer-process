@@ -1,5 +1,5 @@
 {
-    "name": "qlimix/queue-consumer",
+    "name": "qlimix/queue-consumer-process",
     "type": "package",
     "license": "LGPL-3.0-only",
     "authors": [
