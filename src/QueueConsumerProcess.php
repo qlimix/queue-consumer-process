@@ -7,6 +7,7 @@ use Qlimix\Process\Output\OutputInterface;
 use Qlimix\Process\ProcessInterface;
 use Qlimix\Process\Runtime\RuntimeControlInterface;
 use Qlimix\Queue\Processor\ProcessorInterface;
+use Throwable;
 
 final class QueueConsumerProcess implements ProcessInterface
 {
@@ -20,13 +21,14 @@ final class QueueConsumerProcess implements ProcessInterface
 
     /**
      * @inheritDoc
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
     public function run(RuntimeControlInterface $control, OutputInterface $output): void
     {
         while (true) {
             try {
                 $this->processor->process();
-            } catch (\Throwable $exception) {
+            } catch (Throwable $exception) {
                 if ($control->abort()) {
                     break;
                 }

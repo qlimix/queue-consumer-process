@@ -1,37 +1,33 @@
 {
     "name": "qlimix/queue-consumer-process",
-    "type": "package",
-    "license": "LGPL-3.0-only",
+    "type": "library",
+    "description": "A queue consumer process implementation",
+    "license": "MIT",
     "authors": [
         {
             "name": "frank",
             "email": "frank@qlimix.net"
         }
     ],
+    "require": {
+        "php": ">=7.2",
+        "qlimix/queue": "^1.0",
+        "qlimix/process": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "Qlimix\\Queue\\Consumer\\": "src/"
         }
     },
-    "require": {
-        "qlimix/queue": "dev-master",
-        "qlimix/process": "dev-master"
-    },
-    "suggest": {
+    "autoload-dev": {
+        "psr-4": {
+            "Qlimix\\Tests\\Queue\\Consumer\\": "tests/"
+        }
     },
     "config": {
         "sort-packages": true
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@bitbucket.org:qlimix/process.git"
-        },
-        {
-            "type": "vcs",
-            "url":  "git@bitbucket.org:qlimix/queue.git"
-        }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "require-dev": {
+        "qlimix/code-standard": "^1.0"
+    }
 }
