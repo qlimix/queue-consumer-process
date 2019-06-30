@@ -3,6 +3,11 @@
     "type": "library",
     "description": "A queue consumer process implementation",
     "license": "MIT",
+    "keywords": [
+        "queue",
+        "consumer",
+        "process"
+    ],
     "authors": [
         {
             "name": "frank",
