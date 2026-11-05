@@ -1,5 +1,7 @@
 # Queue-consumer-process
 
+> **Archived:** this package is no longer maintained.
+
 [![Travis CI](https://api.travis-ci.org/qlimix/queue-consumer-process.svg?branch=master)](https://travis-ci.org/qlimix/queue-consumer-process)
 [![Coveralls](https://img.shields.io/coveralls/github/qlimix/queue-consumer-process.svg)](https://coveralls.io/github/qlimix/queue-consumer-process)
 [![Packagist](https://img.shields.io/packagist/v/qlimix/queue-consumer-process.svg)](https://packagist.org/packages/qlimix/queue-consumer-process)
